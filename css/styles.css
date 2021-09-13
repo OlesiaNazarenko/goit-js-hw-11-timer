@@ -1,9 +1,8 @@
 body {
-  background: url('https:img1.goodfon.ru/original/1366x768/7/24/makro-priroda-paporotnik-vetki-listia-zelenyi-fon.jpg')
+  background: url('https:img1.goodfon.ru/wallpaper/nbig/7/24/makro-priroda-paporotnik-vetki-listia-zelenyi-fon.jpg')
     no-repeat center center fixed;
   background-size: cover;
 }
-
 .timer {
   display: flex;
   margin: 20px auto;
@@ -26,7 +25,6 @@ body {
   font-size: 40px;
   margin-bottom: 5px;
 }
-
 .label {
   text-transform: uppercase;
 }
