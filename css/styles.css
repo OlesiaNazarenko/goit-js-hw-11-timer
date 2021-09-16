@@ -1,6 +1,5 @@
 body {
-  background: url('https:img1.goodfon.ru/wallpaper/nbig/7/24/makro-priroda-paporotnik-vetki-listia-zelenyi-fon.jpg')
-    no-repeat center center fixed;
+  background: url('../images/bg.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 .timer {
