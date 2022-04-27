@@ -24,10 +24,9 @@ class CountdownTimer {
     days.textContent = this.pad(
       this.pad(time.getDate() - this.targetDate.getDate())
     );
-
     hours.textContent = this.pad(time.getHours() - this.targetDate.getHours());
     mins.textContent = this.pad(
-      time.getMinutes() - this.targetDate.getMinutes()
+      (time.getMinutes() + (60 - this.targetDate.getMinutes())) % 60
     );
     secs.textContent = this.pad(Math.floor((time % (1000 * 60)) / 1000));
   }
