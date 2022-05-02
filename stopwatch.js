@@ -47,11 +47,28 @@ class CountdownTimer {
       }
       return days;
     }
+    function getHoursAsResult(startDate, endDate) {
+      let hours = 0;
+      if (endDate.getHours() === startDate.getHours()) {
+        hours = 0;
+      }
+      if (endDate.getHours() > startDate.getHours()) {
+        hours = endDate.getHours() - startDate.getHours();
+      }
+      if (
+        endDate.getHours() >= 0 &&
+        endDate.getHours() < startDate.getHours()
+      ) {
+        hours = endDate.getHours() + (24 - startDate.getHours());
+      }
+      return hours;
+    }
+
     secs.textContent = this.pad(Math.floor((time % (1000 * 60)) / 1000));
     mins.textContent = this.pad(
       (time.getMinutes() + (60 - this.targetDate.getMinutes())) % 60
     );
-    hours.textContent = this.pad(time.getHours() - this.targetDate.getHours());
+    hours.textContent = this.pad(getHoursAsResult(this.targetDate, time));
     days.textContent = this.pad(getDaysAsResult(this.targetDate, time));
     month.textContent = this.pad(monthDiff(this.targetDate, time));
   }
