@@ -20,15 +20,40 @@ class CountdownTimer {
 
   updateDate({ month, days, hours, mins, secs }) {
     const time = new Date();
-    month.textContent = time.getMonth() - this.targetDate.getMonth();
-    days.textContent = this.pad(
-      this.pad(time.getDate() - this.targetDate.getDate())
-    );
-    hours.textContent = this.pad(time.getHours() - this.targetDate.getHours());
+    function monthDiff(startDate, endDate) {
+      let months;
+      months = (endDate.getFullYear() - startDate.getFullYear()) * 12;
+      months -= startDate.getMonth() + 1;
+      months += endDate.getMonth();
+      if (endDate.getDate() >= startDate.getDate()) months++;
+      return months <= 0 ? 0 : months;
+    }
+    function daysInMonth(date) {
+      return new Date(date.getYear(), date.getMonth() + 1, 0).getDate();
+    }
+    function getDaysAsResult(startDate, endDate) {
+      let days = 0;
+      if (
+        daysInMonth(endDate) >= 30 &&
+        endDate.getDate() > startDate.getDate()
+      ) {
+        days = endDate.getDate() - startDate.getDate();
+      }
+      if (daysInMonth(time) === 30 && endDate.getDate() < startDate.getDate()) {
+        days = 7 + endDate.getDate();
+      }
+      if (daysInMonth(time) === 31 && endDate.getDate() < startDate.getDate()) {
+        days = 6 + endDate.getDate();
+      }
+      return days;
+    }
+    secs.textContent = this.pad(Math.floor((time % (1000 * 60)) / 1000));
     mins.textContent = this.pad(
       (time.getMinutes() + (60 - this.targetDate.getMinutes())) % 60
     );
-    secs.textContent = this.pad(Math.floor((time % (1000 * 60)) / 1000));
+    hours.textContent = this.pad(time.getHours() - this.targetDate.getHours());
+    days.textContent = this.pad(getDaysAsResult(this.targetDate, time));
+    month.textContent = this.pad(monthDiff(this.targetDate, time));
   }
 
   interval() {
